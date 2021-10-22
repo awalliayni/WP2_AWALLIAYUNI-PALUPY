@@ -49,18 +49,28 @@ private function _login()
                     ];
 
                     $this->session->set_userdata($data);
-                    redirect('admin');
-                } else {
-                    $this->session->set_flashdata('pesan', '<div class="alert alert-danger alert-message" role="alert">Password salah!!</div');
-                    redirect('autentifikasi');
-                }
+
+                    if ($user['role_id'] == 1) {
+                        redirect('admin');
+                    } else {
+                        if ($user['image'] == 'default.jpg') {
+                            $this->session->set_flashdata('pesan', '<div class="alert alert-info alert-message" role="alert">Silahkan Ubah Profil Anda Untuk Ubah Photo Profil</div');
+                        }
+                        redirect('user');
+                    }
+                
+                    } else {
+                        $this->session->set_flashdata('pesan', '<div class="alert alert-danger alert-message" role="alert">Password salah!!</div');
+                        redirect('autentifikasi');
+                    }
                 } else {
                     $this->session->set_flashdata('pesan', '<div class="alert alert-danger alert-message" role="alert">User belum diaktivasi!!</div');
                     redirect('autentifikasi');
                 }
-                } else {
-                    $this->session->set_flashdata('pesan', '<div class="alert alert-danger alert-message" role="alert">Email tidak terdaftar!!</div>');
-                    redirect('autentifikasi');
-                }
-    }
+            } else {
+                $this->session->set_flashdata('pesan', '<div class="alert alert-danger alert-message" role="alert">Email tidak terdaftar!!</div>');
+                redirect('autentifikasi');
+            }
+        }
+
 }
