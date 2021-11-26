@@ -34,11 +34,11 @@ class ModelBuku extends CI_Model
         $this->db->select_sum($field);
         if(!empty($where) && count($where) > 0){
             $this->db->where($where);
-    }
+        } 
         $this->db->from('buku');
         return $this->db->get()->row($field);
     }
- 
+    
     //manajemen kategori
     public function getKategori()
     {
@@ -64,7 +64,6 @@ class ModelBuku extends CI_Model
     {
         $this->db->update('kategori', $data, $where);
     }
-
     //join
     public function joinKategoriBuku($where)
     {
@@ -75,5 +74,3 @@ class ModelBuku extends CI_Model
         return $this->db->get();
     }
 }
-
-
